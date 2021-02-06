@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:background="@drawable/bg_main">
+
+
+        <TextView
+            android:id="@+id/welcome_tv"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:text="Welcome, Konovus"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/your_wrk_summary_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Workout Summary"
+            android:textColor="@color/light_gray"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_tv"
+            app:layout_constraintStart_toStartOf="@id/welcome_tv"/>
+
+        <Spinner
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintTop_toTopOf="@+id/your_wrk_summary_tv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_7sdp"
+            android:background="@drawable/shadow"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav_layout" />
+
+        <RelativeLayout
+            android:id="@+id/bottom_nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_mediumBG"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/dashboardBtn"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_outline_dashboard_24"
+                app:tint="@color/white"
+                android:padding="@dimen/_8sdp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_35sdp" />
+
+            <ImageView
+                android:id="@+id/calendarBtn"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_calendar"
+                app:tint="@color/gray"
+                android:padding="@dimen/_8sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_35sdp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/add_workout"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            app:layout_constraintTop_toTopOf="@id/bottom_nav_layout"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:elevation="@dimen/_3sdp"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_add"
+            app:tint="@color/darkPurple"
+            android:background="@drawable/add_bg_gradient" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddWorkout"
+        android:background="@drawable/bg_main">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/white"
+            android:padding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Log New Workout"
+            android:textSize="@dimen/_18ssp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/back_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/back_arrow" />
+
+        <View
+            android:id="@+id/horizontal_delimiter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/dark_mediumBG"
+            app:layout_constraintTop_toBottomOf="@id/back_arrow"
+            android:layout_margin="@dimen/_10sdp" />
+
+        <TextView
+            android:id="@+id/when_workout_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="When did you work out?"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter" />
+
+        <EditText
+            android:id="@+id/date_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar_gradient"
+            android:drawablePadding="@dimen/_10sdp"
+            android:background="@drawable/bg_textview"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:padding="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/ubuntu_medium"
+            app:layout_constraintTop_toBottomOf="@+id/when_workout_tv"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
+            app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter" />
+
+        <TextView
+            android:id="@+id/add_exercises_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Add exercises to your workout"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_marginTop="@dimen/_25sdp"
+            app:layout_constraintTop_toBottomOf="@id/date_input"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter" />
+
+        <TextView
+            android:id="@+id/add_new_exercise_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintTop_toBottomOf="@id/add_exercises_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
+            app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter"
+            android:text="Add New Exercise"
+            android:textSize="@dimen/_13ssp"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:background="@drawable/bg_outline_gradient"
+            app:drawableRightCompat="@drawable/ic_add_circle_outline" />
+
+        <TextView
+            android:id="@+id/save_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Save"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:textColor="@color/darkPurpleIntense"
+            android:background="@drawable/save_bg_gradient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
+            app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

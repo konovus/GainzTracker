@@ -1,17 +1,13 @@
-package com.konovus.gainztracker;
+package com.konovus.gainztracker.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.konovus.gainztracker.R;
 import com.konovus.gainztracker.databinding.ActivityMainBinding;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 

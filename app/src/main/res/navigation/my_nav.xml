@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/dashboard"
-        android:name="com.konovus.gainztracker.Dashboard"
+        android:name="com.konovus.gainztracker.activities.Dashboard"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/calendar"
-        android:name="com.konovus.gainztracker.Calendar"
+        android:name="com.konovus.gainztracker.activities.Calendar"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
 </navigation>

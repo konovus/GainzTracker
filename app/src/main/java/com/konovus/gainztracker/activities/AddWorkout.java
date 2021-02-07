@@ -1,4 +1,4 @@
-package com.konovus.gainztracker;
+package com.konovus.gainztracker.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -8,9 +8,8 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
-import android.text.TextPaint;
-import android.util.Log;
 
+import com.konovus.gainztracker.R;
 import com.konovus.gainztracker.databinding.ActivityAddWorkoutBinding;
 
 import java.text.SimpleDateFormat;

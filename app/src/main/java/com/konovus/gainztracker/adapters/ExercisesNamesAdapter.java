@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.konovus.gainztracker.R;
 import com.konovus.gainztracker.databinding.FlexboxEcercisesNamesItemBinding;
@@ -13,6 +14,7 @@ import com.konovus.gainztracker.databinding.FlexboxEcercisesNamesItemBinding;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,10 +22,9 @@ public class ExercisesNamesAdapter extends RecyclerView.Adapter<ExercisesNamesAd
 
     private List<String> names;
     private LayoutInflater layoutInflater;
-    private ExercisesNamesListener listener;
+    private final ExercisesNamesListener listener;
     Context context;
     private int active_pos = -1;
-    private int last_active_pos = -1;
 
     public ExercisesNamesAdapter(List<String> names, ExercisesNamesListener listener, Context context) {
         this.names = names;
@@ -54,6 +55,7 @@ public class ExercisesNamesAdapter extends RecyclerView.Adapter<ExercisesNamesAd
 
     public interface ExercisesNamesListener{
         void OnExerciseNameClicked(int pos, View view);
+        void OnExerciseNameLongClicked(int pos, View view);
     }
 
     public class ExercisesNamesViewHolder extends RecyclerView.ViewHolder{
@@ -68,21 +70,24 @@ public class ExercisesNamesAdapter extends RecyclerView.Adapter<ExercisesNamesAd
             binding.setName(name);
             if(active_pos == pos){
                 binding.exerciseName.setBackgroundResource(R.drawable.bg_exercises_names_active);
-                binding.exerciseName.setTextColor(Color.parseColor("#CCCCCC"));
+                binding.exerciseName.setTextColor(ContextCompat.getColor(context, R.color.light_gray));
             } else {
                 binding.exerciseName.setBackgroundResource(R.drawable.bg_exercises_names);
-                binding.exerciseName.setTextColor(Color.parseColor("#5187BC"));
+                binding.exerciseName.setTextColor(ContextCompat.getColor(context, R.color.blue));
             }
 
             binding.executePendingBindings();
-            binding.exerciseName.setOnClickListener(v -> {
-                active_pos = getAdapterPosition();
-                if(last_active_pos != -1)
-                    notifyItemChanged(last_active_pos);
-                last_active_pos = active_pos;
+            binding.getRoot().setOnClickListener(v -> {
                 binding.exerciseName.setBackgroundResource(R.drawable.bg_exercises_names_active);
-                binding.exerciseName.setTextColor(Color.parseColor("#CCCCCC"));
-                listener.OnExerciseNameClicked(getAdapterPosition(), v);
+                binding.exerciseName.setTextColor(ContextCompat.getColor(context, R.color.light_gray));
+                if(active_pos != getAdapterPosition() && active_pos != -1)
+                    notifyItemChanged(active_pos);
+                active_pos = getAdapterPosition();
+                listener.OnExerciseNameClicked(active_pos, v);
+            });
+            binding.getRoot().setOnLongClickListener(v -> {
+                listener.OnExerciseNameLongClicked(getAdapterPosition(), v);
+                return true;
             });
         }
     }
@@ -91,4 +96,12 @@ public class ExercisesNamesAdapter extends RecyclerView.Adapter<ExercisesNamesAd
         names = current_names;
     }
 
+    public void removeItem(int pos){
+        names.remove(pos);
+        notifyItemRemoved(pos);
+    }
+    public void addItem(String name){
+        names.add(name);
+        notifyItemInserted(names.size()-1);
+    }
 }

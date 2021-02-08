@@ -89,39 +89,65 @@
             app:layout_constraintTop_toBottomOf="@id/spinner_muscles"
             app:layout_constraintStart_toStartOf="@id/horizontal_delimiter" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/box_shadow_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
             app:layout_constraintEnd_toEndOf="@+id/horizontal_delimiter"
             app:layout_constraintTop_toBottomOf="@id/select_type_tv"
-            android:background="@drawable/shadow2"
-            android:orientation="vertical">
+            android:background="@drawable/shadow2">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/exercises_names_recyclerView"
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:minHeight="@dimen/_50sdp"
-                tools:listitem="@layout/flexbox_ecercises_names_item"/>
+                android:layout_height="@dimen/_125sdp"
+                app:layout_constraintTop_toTopOf="@id/box_shadow_1">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/exercises_names_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_3sdp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.core.widget.NestedScrollView>
+
 
             <EditText
-                android:id="@+id/date_input"
+                android:id="@+id/exercise_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_15sdp"
                 android:hint="Type in your own exercise"
                 android:background="@drawable/bg_textview"
                 android:padding="@dimen/_8sdp"
+                android:inputType="text"
+                android:singleLine="true"
+                android:maxLength="35"
                 android:textColor="@color/light_gray"
                 android:textColorHint="@color/hint"
                 android:textSize="@dimen/_12ssp"
-                android:fontFamily="@font/ubuntu_regular" />
+                android:fontFamily="@font/ubuntu_regular"
+                app:layout_constraintTop_toBottomOf="@id/scrollView"/>
+            <TextView
+                android:id="@+id/add_exercise_name_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:visibility="gone"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ubuntu_medium"
+                android:padding="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="@id/exercise_name_input"
+                app:layout_constraintBottom_toBottomOf="@id/exercise_name_input"
+                app:layout_constraintEnd_toEndOf="@id/exercise_name_input"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/box_shadow_2"
@@ -198,7 +224,7 @@
             android:layout_marginBottom="@dimen/_15sdp"
             android:textColor="@color/darkPurpleIntense"
             android:background="@drawable/save_bg_gradient"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/box_shadow_2"
             app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
             app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter" />
 

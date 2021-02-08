@@ -13,7 +13,9 @@
     <color name="gray">#4A4A4A</color>
     <color name="light_gray">#CCCCCC</color>
     <color name="hint">#9F9E9E</color>
-    <color name="blue">#5187BC</color>
+    <color name="blue">#5B97D1</color>
+    <color name="red">#D32F2F</color>
+
 
 
 </resources>

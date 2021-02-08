@@ -7,21 +7,35 @@
             name="name"
             type="String" />
     </data>
-
-    <TextView
-        android:id="@+id/exercise_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_medium"
-        android:textSize="@dimen/_13ssp"
-        android:textColor="@color/blue"
-        android:paddingHorizontal="@dimen/_8sdp"
-        android:paddingVertical="@dimen/_6sdp"
-        android:layout_marginVertical="@dimen/_2sdp"
-        android:text="@{name}"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/exercise_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_medium"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/blue"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_6sdp"
+            android:layout_marginVertical="@dimen/_4sdp"
+            android:text="@{name}"
 
-        android:background="@drawable/bg_exercises_names"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+            android:background="@drawable/bg_exercises_names"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <ImageView
+            android:id="@+id/delete_exercise_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@drawable/ic_close"
+            android:background="@drawable/bg_close_shape"
+            android:layout_margin="@dimen/_4sdp"
+            android:padding="@dimen/_2sdp"
+            app:layout_constraintStart_toEndOf="@id/exercise_name"
+            app:layout_constraintBottom_toTopOf="@id/exercise_name"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

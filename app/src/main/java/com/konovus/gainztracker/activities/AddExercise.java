@@ -1,17 +1,6 @@
 package com.konovus.gainztracker.activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.flexbox.FlexDirection;
@@ -28,28 +16,44 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.konovus.gainztracker.R;
 import com.konovus.gainztracker.adapters.ExercisesNamesAdapter;
+import com.konovus.gainztracker.adapters.SetsAdapter;
 import com.konovus.gainztracker.databinding.ActivityAddExerciseBinding;
 import com.konovus.gainztracker.databinding.LayoutDeleteExerciseNameBinding;
+import com.konovus.gainztracker.models.Exercise;
+import com.konovus.gainztracker.models.Set_exercise;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AddExercise extends AppCompatActivity implements ExercisesNamesAdapter.ExercisesNamesListener {
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+public class AddExercise extends AppCompatActivity implements ExercisesNamesAdapter.ExercisesNamesListener, SetsAdapter.SetsListener {
 
     private ActivityAddExerciseBinding binding;
     private ExercisesNamesAdapter adapter;
     private AlertDialog deleteDialog;
-    List<String> exercises_names;
+    private List<String> exercises_names;
+    private SetsAdapter setsAdapter;
+    private final Exercise exercise = new Exercise();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_exercise);
 
-        inputExerciseNameSetup();
-        recyclerViewSetup();
+        binding.backArrow.setOnClickListener(v -> onBackPressed());
+
+
         spinnerSetup();
+        recyclerViewSetup();
+        inputExerciseNameSetup();
+        setsNumberInputSetup();
+        saveExerciseSetup();
+
     }
 
     private void inputExerciseNameSetup(){
@@ -93,6 +97,58 @@ public class AddExercise extends AppCompatActivity implements ExercisesNamesAdap
 
     }
 
+    private void setsNumberInputSetup(){
+        List<Set_exercise> setExercises = new ArrayList<>();
+        setExercises.add(new Set_exercise());
+        setsAdapter = new SetsAdapter(setExercises, this, this);
+        binding.setsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.setsRecyclerView.setAdapter(setsAdapter);
+
+        binding.leftArrow.setOnClickListener(v ->{
+            if(setExercises.size() >= 1) {
+                setsAdapter.removeItem(setExercises.size() - 1);
+                setExercises.remove(setExercises.size() - 1);
+                setsAdapter.setItems(setExercises);
+                binding.setsNumber.setText(String.valueOf(setExercises.size()));
+            }
+        });
+
+        binding.rightArrow.setOnClickListener(v ->{
+            setsAdapter.addItem();
+            setExercises.add(new Set_exercise());
+            setsAdapter.setItems(setExercises);
+            binding.setsNumber.setText(String.valueOf(setExercises.size()));
+        });
+
+    }
+
+    private void saveExerciseSetup(){
+        binding.saveBtn.setOnClickListener(v -> {
+            List<Set_exercise> data = setsAdapter.getSetExercises();
+            if(data != null && !data.isEmpty())
+            for(Set_exercise setExercise : data){
+                if (setExercise.getWeight() == null || setExercise.getWeight().toString().isEmpty())
+                    setExercise.setWeight(0);
+                if(setExercise.getReps() == 0) {
+                    Toast.makeText(this, "Reps cannot be 0", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (exercise.getName() == null || exercise.getName().trim().isEmpty()) {
+                    Toast.makeText(this, "Select the exercise name!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+                exercise.setMuscle(binding.spinnerMuscles.getSelectedItem().toString());
+                exercise.setSetExercises(data);
+
+                Intent intent = new Intent();
+                intent.putExtra("exercise", exercise);
+                setResult(RESULT_OK, intent);
+                finish();
+
+        });
+    }
+
     private void spinnerSetup(){
         List<String> muscle_groups = new ArrayList<>();
         Collections.addAll(muscle_groups, "Chest", "Back", "Biceps", "Triceps", "Abs", "Legs", "Calves");
@@ -100,22 +156,14 @@ public class AddExercise extends AppCompatActivity implements ExercisesNamesAdap
 
         // attaching data adapter to spinner
         binding.spinnerMuscles.setAdapter(dataAdapter);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(getIntent().getBooleanExtra("isExerciseNameDeleted", false)){
-            exercises_names.remove(getIntent().getIntExtra("pos", -1));
-            adapter.setNames(exercises_names);
-            adapter.notifyItemRemoved(getIntent().getIntExtra("pos", -1));
-        }
     }
 
 
-    @Override
-    public void OnExerciseNameClicked(int pos, View view) {
 
+    @Override
+    public void OnExerciseNameClicked(int pos) {
+        exercise.setName(exercises_names.get(pos));
     }
 
     @Override
@@ -142,5 +190,10 @@ public class AddExercise extends AppCompatActivity implements ExercisesNamesAdap
             deleteExerciseNameBinding.cancelDelete.setOnClickListener(v -> deleteDialog.dismiss());
         }
         deleteDialog.show();
+    }
+
+    @Override
+    public void OnSetsClick(int pos) {
+
     }
 }

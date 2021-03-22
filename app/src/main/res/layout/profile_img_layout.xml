@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/profile_layout_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_20sdp"
+    android:background="@drawable/shadow2">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/profile_img"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/ic_profile_placeholder"
+        android:tint="@color/gray"
+        app:civ_border_width="@dimen/_1sdp"
+        app:civ_border_color="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/profile_img_wrapper"-->
+<!--        android:layout_width="@dimen/_60sdp"-->
+<!--        android:layout_height="@dimen/_60sdp"-->
+<!--        app:cardCornerRadius="@dimen/_40sdp"-->
+<!--        android:layout_marginTop="@dimen/_15sdp"-->
+<!--        android:padding="@dimen/_1sdp"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/profile_img"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:transitionName="shared_transition"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:tint="@color/gray"-->
+<!--            android:src="@drawable/ic_profile_placeholder"/>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+    <EditText
+        android:id="@+id/name_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Your Name"
+        android:background="@null"
+        android:inputType="text"
+        android:lines="1"
+        android:textAlignment="center"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint"
+        android:fontFamily="@font/ubuntu_medium"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@id/profile_img"
+        app:layout_constraintStart_toStartOf="@id/profile_img"
+        app:layout_constraintEnd_toEndOf="@id/profile_img"
+        />
+    <View
+        android:id="@+id/horizontal_delimiter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@color/delimiter_color"
+        app:layout_constraintTop_toBottomOf="@id/name_et"
+        android:layout_marginTop="@dimen/_30sdp" />
+    <TextView
+        android:id="@+id/cancel_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Cancel"
+        android:textAlignment="center"
+        android:paddingTop="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vertical_delimiter"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <View
+        android:id="@+id/vertical_delimiter"
+        android:layout_width="@dimen/_2sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/delimiter_color"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/ok_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="OK"
+        android:textAlignment="center"
+        android:paddingTop="@dimen/_8sdp"
+
+        android:textColor="@color/white"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toEndOf="@id/vertical_delimiter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

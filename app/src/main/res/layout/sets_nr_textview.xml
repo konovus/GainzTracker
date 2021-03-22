@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/setExercises"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text='@{"Set " + set_number}'
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:paddingVertical="@dimen/_2sdp"
+    android:background="@drawable/bg_sets_shape"
+    android:textSize="@dimen/_12ssp"
+    android:textColor="@color/teal_200"
+    android:fontFamily="@font/ubuntu_regular"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+</TextView>

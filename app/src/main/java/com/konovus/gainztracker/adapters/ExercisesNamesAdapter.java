@@ -54,7 +54,7 @@ public class ExercisesNamesAdapter extends RecyclerView.Adapter<ExercisesNamesAd
     }
 
     public interface ExercisesNamesListener{
-        void OnExerciseNameClicked(int pos, View view);
+        void OnExerciseNameClicked(int pos);
         void OnExerciseNameLongClicked(int pos, View view);
     }
 
@@ -83,7 +83,7 @@ public class ExercisesNamesAdapter extends RecyclerView.Adapter<ExercisesNamesAd
                 if(active_pos != getAdapterPosition() && active_pos != -1)
                     notifyItemChanged(active_pos);
                 active_pos = getAdapterPosition();
-                listener.OnExerciseNameClicked(active_pos, v);
+                listener.OnExerciseNameClicked(active_pos);
             });
             binding.getRoot().setOnLongClickListener(v -> {
                 listener.OnExerciseNameLongClicked(getAdapterPosition(), v);

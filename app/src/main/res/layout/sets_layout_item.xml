@@ -11,11 +11,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
         android:background="@color/darkPurple">
 
         <TextView
-            android:id="@+id/sets"
+            android:id="@+id/setExercises"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{"Set " + set_number}'
@@ -36,28 +36,41 @@
             android:textColor="@color/white"
             android:drawableLeft="@drawable/ic_repeat"
             android:drawablePadding="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/ubuntu_regular"
             android:gravity="center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/sets"
+            app:layout_constraintTop_toBottomOf="@id/setExercises"
             app:layout_constraintStart_toStartOf="parent"
             android:drawableTint="@color/teal_700" />
 
         <EditText
             android:id="@+id/reps_input"
-            android:layout_width="@dimen/_100sdp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="1"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:hint="0"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:textAlignment="center"
             android:background="@drawable/bg_textview"
             android:padding="@dimen/_8sdp"
+            android:inputType="number"
             android:textColor="@color/light_gray"
             android:textColorHint="@color/hint"
             android:textSize="@dimen/_12ssp"
             android:fontFamily="@font/ubuntu_regular"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/centerPoint"
             app:layout_constraintTop_toBottomOf="@id/reps_tv" />
+
+        <View
+            android:id="@+id/centerPoint"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/weight_tv"
@@ -67,19 +80,22 @@
             android:textColor="@color/white"
             android:drawableLeft="@drawable/ic_fitnes"
             android:drawablePadding="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/ubuntu_regular"
             android:gravity="center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/sets"
+            app:layout_constraintTop_toTopOf="@id/reps_tv"
             app:layout_constraintStart_toStartOf="@id/weight_input"
             android:drawableTint="@color/teal_700" />
 
         <EditText
             android:id="@+id/weight_input"
-            android:layout_width="@dimen/_100sdp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="15"
+            android:hint="0"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:textColorHint="@color/hint"
+            android:inputType="number"
             android:textAlignment="center"
             android:background="@drawable/bg_textview"
             android:padding="@dimen/_8sdp"
@@ -87,7 +103,8 @@
             android:textSize="@dimen/_12ssp"
             android:fontFamily="@font/ubuntu_regular"
             android:layout_marginLeft="@dimen/_10sdp"
-            app:layout_constraintStart_toEndOf="@id/reps_input"
+            app:layout_constraintStart_toEndOf="@id/centerPoint"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/reps_tv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

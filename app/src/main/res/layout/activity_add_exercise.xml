@@ -11,8 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.AddExercise"
-        android:background="@drawable/bg_main">
+        android:background="@color/darkPurple">
 
+        <View
+            android:id="@+id/top_panel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_125sdp"
+            android:background="@color/darkPurpleIntense"
+            app:layout_constraintTop_toTopOf="parent"/>
         <ImageView
             android:id="@+id/back_arrow"
             android:layout_width="@dimen/_32sdp"
@@ -20,7 +26,7 @@
             android:src="@drawable/ic_arrow_back"
             app:tint="@color/white"
             android:padding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -42,7 +48,8 @@
             android:layout_height="@dimen/_2sdp"
             android:background="@color/dark_mediumBG"
             app:layout_constraintTop_toBottomOf="@id/back_arrow"
-            android:layout_margin="@dimen/_10sdp" />
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_5sdp" />
 
         <TextView
             android:id="@+id/choose_muscle_tv"
@@ -63,7 +70,7 @@
             android:background="@drawable/spinner_bg"
             android:popupBackground="@drawable/spinner_bg"
             android:spinnerMode="dropdown"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
             app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter"
             app:layout_constraintTop_toBottomOf="@id/choose_muscle_tv" />
@@ -77,156 +84,190 @@
             app:layout_constraintTop_toTopOf="@id/spinner_muscles"
             app:layout_constraintBottom_toBottomOf="@id/spinner_muscles"/>
 
-        <TextView
-            android:id="@+id/select_type_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Select type of exercise"
-            android:textSize="@dimen/_12ssp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/ubuntu_regular"
-            android:layout_marginTop="@dimen/_30sdp"
-            app:layout_constraintTop_toBottomOf="@id/spinner_muscles"
-            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/box_shadow_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:paddingTop="@dimen/_5sdp"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:paddingBottom="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
-            app:layout_constraintEnd_toEndOf="@+id/horizontal_delimiter"
-            app:layout_constraintTop_toBottomOf="@id/select_type_tv"
-            android:background="@drawable/shadow2">
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/scrollView"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@+id/top_panel"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_125sdp"
-                app:layout_constraintTop_toTopOf="@id/box_shadow_1">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/exercises_names_recyclerView"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/select_type_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/_3sdp"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:text="Select type of exercise"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     app:layout_constraintTop_toTopOf="parent"/>
-            </androidx.core.widget.NestedScrollView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/box_shadow_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:elevation="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/select_type_tv"
+                    android:background="@drawable/bg_recycler_item">
+
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/scrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_97sdp"
+                        app:layout_constraintTop_toTopOf="@id/box_shadow_1">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/exercises_names_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_3sdp"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                    </androidx.core.widget.NestedScrollView>
 
 
-            <EditText
-                android:id="@+id/exercise_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
-                android:hint="Type in your own exercise"
-                android:background="@drawable/bg_textview"
-                android:padding="@dimen/_8sdp"
-                android:inputType="text"
-                android:singleLine="true"
-                android:maxLength="35"
-                android:textColor="@color/light_gray"
-                android:textColorHint="@color/hint"
-                android:textSize="@dimen/_12ssp"
-                android:fontFamily="@font/ubuntu_regular"
-                app:layout_constraintTop_toBottomOf="@id/scrollView"/>
-            <TextView
-                android:id="@+id/add_exercise_name_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OK"
-                android:visibility="gone"
-                android:textSize="@dimen/_14ssp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/ubuntu_medium"
-                android:padding="@dimen/_4sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="@id/exercise_name_input"
-                app:layout_constraintBottom_toBottomOf="@id/exercise_name_input"
-                app:layout_constraintEnd_toEndOf="@id/exercise_name_input"/>
+                    <EditText
+                        android:id="@+id/exercise_name_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_15sdp"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:hint="Type in your own exercise"
+                        android:background="@drawable/bg_textview"
+                        android:paddingVertical="@dimen/_8sdp"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:maxLength="35"
+                        android:textColor="@color/light_gray"
+                        android:textColorHint="@color/hint"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/ubuntu_regular"
+                        app:layout_constraintTop_toBottomOf="@id/scrollView"/>
+                    <TextView
+                        android:id="@+id/add_exercise_name_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OK"
+                        android:visibility="gone"
+                        android:textSize="@dimen/_14ssp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:padding="@dimen/_4sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="@id/exercise_name_input"
+                        app:layout_constraintBottom_toBottomOf="@id/exercise_name_input"
+                        app:layout_constraintEnd_toEndOf="@id/exercise_name_input"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/box_shadow_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/shadow2"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
-            app:layout_constraintEnd_toEndOf="@+id/horizontal_delimiter"
-            app:layout_constraintTop_toBottomOf="@id/box_shadow_1">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/box_shadow_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/bg_recycler_item"
+                    android:elevation="@dimen/_10sdp"
+                    android:padding="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/box_shadow_1"
+                    app:layout_constraintBottom_toTopOf="@id/save_btn">
 
-            <TextView
-                android:id="@+id/how_many_sets_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="How many sets"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/ubuntu_regular"
-                app:layout_constraintTop_toTopOf="@id/box_shadow_2"
-                app:layout_constraintStart_toStartOf="@id/box_shadow_2" />
+                    <TextView
+                        android:id="@+id/how_many_sets_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="How many sets"
+                        android:textSize="@dimen/_12ssp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/ubuntu_regular"
+                        app:layout_constraintTop_toTopOf="@id/box_shadow_2"
+                        app:layout_constraintStart_toStartOf="@id/box_shadow_2" />
 
-            <EditText
-                android:id="@+id/sets_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_textview"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="1"
-                android:gravity="center"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/light_gray"
-                android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/ubuntu_bold"
-                app:layout_constraintTop_toBottomOf="@id/how_many_sets_tv" />
+                    <TextView
+                        android:id="@+id/sets_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_textview"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="1"
+                        android:focusable="false"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_8sdp"
+                        android:textColor="@color/light_gray"
+                        android:textSize="@dimen/_14ssp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        app:layout_constraintStart_toStartOf="@id/box_shadow_2"
+                        app:layout_constraintEnd_toEndOf="@id/box_shadow_2"
+                        app:layout_constraintTop_toBottomOf="@id/how_many_sets_tv" />
 
-            <ImageView
-                android:id="@+id/left_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_left"
-                app:layout_constraintTop_toTopOf="@id/sets_number"
-                app:layout_constraintBottom_toBottomOf="@id/sets_number"
-                app:layout_constraintStart_toStartOf="@id/sets_number" />
+                    <ImageView
+                        android:id="@+id/left_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/arrow_left_gr"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintTop_toTopOf="@id/sets_number"
+                        app:layout_constraintBottom_toBottomOf="@id/sets_number"
+                        app:layout_constraintStart_toStartOf="@id/sets_number" />
 
-            <ImageView
-                android:id="@+id/right_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintTop_toTopOf="@id/sets_number"
-                app:layout_constraintBottom_toBottomOf="@id/sets_number"
-                app:layout_constraintEnd_toEndOf="@id/sets_number" />
+                    <ImageView
+                        android:id="@+id/right_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/arrow_right_gr"
+                        app:layout_constraintTop_toTopOf="@id/sets_number"
+                        app:layout_constraintBottom_toBottomOf="@id/sets_number"
+                        app:layout_constraintEnd_toEndOf="@id/sets_number"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sets_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/sets_layout_item"
-                android:layout_marginVertical="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/sets_number" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sets_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHeight_default="wrap"
+                        app:layout_constraintHeight_max="@dimen/_300sdp"
+                        app:layout_constraintTop_toBottomOf="@id/sets_number"
+                        app:layout_constraintVertical_bias="1.0"
+                        tools:layout_editor_absoluteX="10dp"
+                        tools:listitem="@layout/sets_layout_item" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/save_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:text="Save"
+                    android:textSize="@dimen/_14ssp"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:gravity="center"
+                    android:imeOptions="actionDone"
+                    android:focusable="true"
+                    android:elevation="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:textColor="@color/darkPurpleIntense"
+                    android:background="@drawable/save_bg_gradient"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
-        <TextView
-            android:id="@+id/save_btn"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
-            android:text="Save"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/ubuntu_medium"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:textColor="@color/darkPurpleIntense"
-            android:background="@drawable/save_bg_gradient"
-            app:layout_constraintTop_toBottomOf="@id/box_shadow_2"
-            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
-            app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

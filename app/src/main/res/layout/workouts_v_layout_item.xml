@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_recycler_item"
+        android:elevation="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/muscle_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:text="Chest"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_medium"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:text="November"
+            android:textColor="@color/light_gray"
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/muscle_name" />
+
+        <View
+            android:id="@+id/horizontal_delimiter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/dark_mediumBG"
+            app:layout_constraintTop_toBottomOf="@id/muscle_name"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_5sdp" />
+
+        <TextView
+            android:id="@+id/yAxis_label"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Max Weight (kgs)"
+            android:fontFamily="@font/ubuntu_light"
+            android:textSize="@dimen/_8ssp"
+            android:textColor="@color/light_gray"
+            android:rotation="-90"
+            android:gravity="fill_vertical"
+            android:includeFontPadding="false"
+            android:paddingStart="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
+            app:layout_constraintEnd_toStartOf="@id/horizontal_delimiter"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            app:layout_constraintStart_toEndOf="@id/yAxis_label"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/xAxis_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time (week)"
+            android:fontFamily="@font/ubuntu_light"
+            android:textSize="@dimen/_8ssp"
+            android:textColor="@color/light_gray"
+            android:includeFontPadding="false"
+            android:paddingStart="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="@id/horizontal_delimiter"
+            app:layout_constraintEnd_toEndOf="@id/horizontal_delimiter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

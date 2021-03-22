@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_round"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_fitnes_gradient"
+            app:layout_constraintTop_toTopOf="@+id/muscle_name"
+            app:layout_constraintBottom_toBottomOf="@id/exercises_count"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/muscle_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/ubuntu_medium"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/exercises_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="laksdj"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toBottomOf="@id/muscle_name"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

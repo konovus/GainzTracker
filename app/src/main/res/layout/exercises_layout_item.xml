@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="setNr"
+            type="Integer" />
+        <variable
+            name="repsNr"
+            type="Integer" />
+        <variable
+            name="weightNr"
+            type="Integer" />
+    </data>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_recycler_item"
+            android:elevation="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/exercise_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{name}"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ubuntu_medium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/delete_exercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/white"
+                android:visibility="gone"
+                android:layout_margin="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <View
+                android:id="@+id/horizontal_delimiter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/delimiter_color"
+                app:layout_constraintTop_toBottomOf="@id/exercise_name_tv"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_5sdp" />
+            <LinearLayout
+                android:id="@+id/sets_list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingTop="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_delimiter"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

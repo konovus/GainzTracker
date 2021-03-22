@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="setNr"
+            type="Integer" />
+        <variable
+            name="repsNr"
+            type="Integer" />
+        <variable
+            name="weightNr"
+            type="Integer" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/set_row_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_6sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/setExercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"Set " + setNr}'
+            android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:background="@drawable/bg_sets_shape"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/teal_200"
+            android:fontFamily="@font/ubuntu_medium" />
+
+        <TextView
+            android:id="@+id/reps_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{repsNr + " reps "}'
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_marginHorizontal="@dimen/_8sdp" />
+
+        <View
+            android:id="@+id/vertical_delimiter"
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:background="@color/delimiter_color"
+            android:layout_marginHorizontal="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/weight_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{weightNr + " kgs weight "}'
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_marginHorizontal="@dimen/_8sdp" />
+
+    </LinearLayout>
+</layout>

@@ -68,20 +68,6 @@
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/title"/>
 
-<!--            <com.applandeo.materialcalendarview.CalendarView-->
-<!--                android:id="@+id/calendar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="@drawable/bg_recycler_item"-->
-<!--                app:selectionColor="@color/teal_200"-->
-<!--                app:headerLabelColor="@color/white"-->
-<!--                app:headerColor="@color/darkPurple"-->
-<!--                app:abbreviationsBarColor="@color/darkPurple"-->
-<!--                app:abbreviationsLabelsColor="@color/white"-->
-<!--                app:pagesColor="@color/darkPurple"-->
-<!--                app:daysLabelsColor="@color/white"-->
-<!--                android:visibility="gone"/>-->
-
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView

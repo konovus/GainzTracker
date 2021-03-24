@@ -133,13 +133,6 @@ public class CalendarActivity extends AppCompatActivity implements WorkoutAdapte
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(edit){}
-
-    }
-
     private void recyclerViewSetup(){
         if(workouts == null)
             workouts = new ArrayList<>();

@@ -37,6 +37,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.konovus.gainztracker.activities.MainActivity.new_workout;
 import static com.konovus.gainztracker.activities.MainActivity.path;
 
 
@@ -71,6 +72,13 @@ public class CalendarFragment extends Fragment implements WorkoutAdapter.Workout
 //        calendarSetup();
 
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(new_workout)
+            getWorkouts();
+        new_workout = false;
     }
 
     @Override

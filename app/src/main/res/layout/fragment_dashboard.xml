@@ -115,6 +115,8 @@
                 app:layout_constraintTop_toBottomOf="@id/recyclerView_h_workouts"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/welcome_tv" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

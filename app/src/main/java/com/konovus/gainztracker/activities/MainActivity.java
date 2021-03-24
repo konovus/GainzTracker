@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public Bitmap bitmap;
     private static String name;
     public static String path;
+    public static boolean new_workout;
 
 
     @Override
@@ -254,27 +256,13 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 //
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            if (resultCode == RESULT_OK) {
-//                Uri selectedImageUri = result.getUri();
-//                if (selectedImageUri != null) {
-//                    try {
-//                        InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
-//                        bitmap = BitmapFactory.decodeStream(inputStream);
-//                        profile_image.setImageBitmap(bitmap);
-//                    } catch (Exception e) {
-//                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//        }
-//        if(requestCode == REQUEST_CODE_ADD_WORKOUT || requestCode == REQUEST_CODE_EDIT_WORKOUT)
-//            getWorkouts();
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_CODE_ADD_WORKOUT || requestCode == REQUEST_CODE_EDIT_WORKOUT)
+            new_workout = true;
+    }
 //
 //    @Override
 //    public void OnWorkoutClick(int pos, View view, Workout workout) {

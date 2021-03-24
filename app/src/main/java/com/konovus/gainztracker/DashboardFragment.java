@@ -1,6 +1,7 @@
 package com.konovus.gainztracker;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,7 +14,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +45,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,6 +58,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.konovus.gainztracker.activities.MainActivity.new_workout;
 import static com.konovus.gainztracker.activities.MainActivity.path;
 
 public class DashboardFragment extends Fragment implements WorkoutHAdapter.WorkoutHListener{
@@ -85,8 +85,6 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
         View view = binding.getRoot();
 
         binding.profileImg.setOnClickListener(v -> profileDialogSetup());
-        long endTime_two = System.nanoTime();
-        Log.i("TIME Measure", "After simple methods - " + TimeUnit.NANOSECONDS.toMillis(endTime_two - 0) + " - " + (endTime_two - 0));
 
         if(path != null && name != null){
             binding.nameTv.setText(name);
@@ -94,24 +92,24 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .load(path + "/profile_img.jpg").into(binding.profileImg);
         } else new LoadInternallyAsync(binding.nameTv, binding.profileImg).execute();
-        long endTime_three = System.nanoTime();
-        Log.i("TIME Measure", "After profile img - " + TimeUnit.NANOSECONDS.toMillis(endTime_three - endTime_two) + " - " + (endTime_three - endTime_two));
 
         getWorkouts();
-        long endTime_four = System.nanoTime();
-        Log.i("TIME Measure", "After getWorkouts - " + TimeUnit.NANOSECONDS.toMillis(endTime_four - endTime_three) + " - " + (endTime_four - endTime_three));
         hRecyclerViewSetup();
-        long endTime_five = System.nanoTime();
-        Log.i("TIME Measure", "After Hrecycler - " + TimeUnit.NANOSECONDS.toMillis(endTime_five - endTime_four) + " - " + (endTime_five - endTime_four));
         vRecyclerViewSetup();
-        long endTime_six = System.nanoTime();
-        Log.i("TIME Measure", "After Vrecycler - " + TimeUnit.NANOSECONDS.toMillis(endTime_six - endTime_five) + " - " + (endTime_six - endTime_five));
         spinnerSetup();
-        long endTime_seven = System.nanoTime();
-        Log.i("TIME Measure", "After spinner - " + TimeUnit.NANOSECONDS.toMillis(endTime_seven - endTime_six) + " - " + (endTime_seven - endTime_six));
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(new_workout)
+            getWorkouts();
+        new_workout = false;
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -127,7 +125,7 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == getActivity().RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImageUri = result.getUri();
                 if (selectedImageUri != null) {
                     try {

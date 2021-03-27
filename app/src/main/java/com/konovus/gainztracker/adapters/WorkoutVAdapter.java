@@ -21,8 +21,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -72,6 +75,9 @@ public class WorkoutVAdapter extends RecyclerView.Adapter<WorkoutVAdapter.Workou
     public class WorkoutVViewHolder extends RecyclerView.ViewHolder{
 
         private WorkoutsVLayoutItemBinding binding;
+        LineDataSet set1;
+        LineData data;
+        ArrayList<ILineDataSet> dataSets;
 
         public WorkoutVViewHolder(WorkoutsVLayoutItemBinding binding) {
             super(binding.getRoot());
@@ -96,34 +102,27 @@ public class WorkoutVAdapter extends RecyclerView.Adapter<WorkoutVAdapter.Workou
                 for(int i = 1; i <= cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++)
                     xLabel.add(iMonth + "/" + i);
 
-                final ArrayList<Entry> values_zero = new ArrayList();
-                for(int i = 1; i <= cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++)
-                    values_zero.add(new Entry(i, 10));
 
-                ArrayList<Entry> values = new ArrayList();
-                for(Exercise exercise : exercises){
-                    String d = "";
-                    if(exercise.getDate().startsWith("0"))
-                        d = exercise.getDate().substring(1,2);
-                    else d = exercise.getDate().substring(0,2);
-                    values.add(new Entry(Integer.parseInt(d),
-                            exercise.getSetExercises().get(0).getWeight() == null ? 0 : getMaxWeight(exercise.getSetExercises())));
+                final Map<Float, Float> vals = new HashMap<>();
+                for(int i = 0; i < exercises.size(); i++){
+                    int d;
+                    if(exercises.get(i).getDate().startsWith("0"))
+                        d = Integer.parseInt(exercises.get(i).getDate().substring(1,2));
+                    else d = Integer.parseInt(exercises.get(i).getDate().substring(0,2));
+                    int max = getMaxWeight(exercises.get(i).getSetExercises());
+                    vals.put((float) d, (float)(exercises.get(i).getSetExercises().get(0).getWeight() == null ? 0 : max));
                 }
+                set1 = new LineDataSet(new ArrayList<>(), "");
+                final Map<Float, Float> sortedValues = new TreeMap<>(vals);
+                for(float i : sortedValues.keySet())
+                    set1.addEntry(new Entry(i, sortedValues.get(i)));
 
-                LineDataSet set1 = new LineDataSet(values, "");;
                 set1.setValueTextColor(ContextCompat.getColor(context, R.color.white));
                 set1.setValueTextSize(12f);
 
-                LineDataSet set_zero = new LineDataSet(values_zero, "");;
-                set_zero.setColor(ContextCompat.getColor(context, R.color.transparent));
-                set_zero.setCircleColor(ContextCompat.getColor(context, R.color.transparent));
-                set_zero.setCircleHoleColor(ContextCompat.getColor(context, R.color.transparent));
-                set_zero.setDrawValues(false);
-
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                dataSets = new ArrayList<>();
                 dataSets.add(set1);
-                dataSets.add(set_zero);
-                LineData data = new LineData(dataSets);
+                data = new LineData(dataSets);
 
                 XAxis xAxis = binding.lineChart.getXAxis();
                 xAxis.setValueFormatter(new ValueFormatter() {
@@ -145,6 +144,8 @@ public class WorkoutVAdapter extends RecyclerView.Adapter<WorkoutVAdapter.Workou
                 xAxis.setTextSize(12);
                 xAxis.setYOffset(5);
                 xAxis.setLabelCount(5,true);
+                xAxis.setAxisMinimum(0);
+                xAxis.setAxisMaximum(cal.getActualMaximum(Calendar.DAY_OF_MONTH) - 1);
 
                 YAxis axisRight = binding.lineChart.getAxisRight();
                 axisRight.setDrawGridLines(false);
@@ -153,6 +154,7 @@ public class WorkoutVAdapter extends RecyclerView.Adapter<WorkoutVAdapter.Workou
                 axisLeft.setDrawAxisLine(false);
                 axisLeft.setTextSize(11);
                 axisLeft.setLabelCount(4, true);
+                axisLeft.setAxisMinimum(0f);
                 axisLeft.setXOffset(10);
                 axisLeft.setTextColor(ContextCompat.getColor(context, R.color.light_gray));
 

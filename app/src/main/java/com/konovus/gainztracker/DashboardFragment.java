@@ -58,7 +58,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.konovus.gainztracker.activities.MainActivity.new_workout;
 import static com.konovus.gainztracker.activities.MainActivity.path;
 
 public class DashboardFragment extends Fragment implements WorkoutHAdapter.WorkoutHListener{
@@ -101,14 +100,15 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(new_workout)
-            getWorkouts();
-        new_workout = false;
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if(new_workout_d)
+//            getWorkouts();
+//        new_workout_d = false;
+//        new_workout_c = false;
+//
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -138,8 +138,8 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
                 }
             }
         }
-        if(requestCode == REQUEST_CODE_ADD_WORKOUT || requestCode == REQUEST_CODE_EDIT_WORKOUT)
-            getWorkouts();
+//        if(requestCode == REQUEST_CODE_ADD_WORKOUT || requestCode == REQUEST_CODE_EDIT_WORKOUT)
+//            getWorkouts();
     }
 
     private void getWorkouts(){
@@ -149,6 +149,7 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(workouts_current -> {
+                    workouts.clear();
                     workouts.addAll(workouts_current);
                     workouts.sort(Collections.reverseOrder());
                     vAdapter.setExercises(getExercisesLists(Calendar.getInstance().get(Calendar.MONTH)),
@@ -336,6 +337,9 @@ public class DashboardFragment extends Fragment implements WorkoutHAdapter.Worko
                         workouts.remove(workout);
                         hAdapter.setWorkouts(getFilteredWorkouts(binding.spinnerMonths.getSelectedItemPosition()));
                         hAdapter.notifyItemRemoved(pos);
+                        vAdapter.setExercises(getExercisesLists(binding.spinnerMonths.getSelectedItemPosition()),
+                                binding.spinnerMonths.getSelectedItem().toString());
+                        vAdapter.notifyDataSetChanged();
                         mypopupWindow.dismiss();
                         compositeDisposable.dispose();
                     }));

@@ -116,6 +116,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/welcome_tv" />
 
+<!--            <ImageView-->
+<!--                android:id="@+id/add_workout"-->
+<!--                android:layout_width="@dimen/_50sdp"-->
+<!--                android:layout_height="@dimen/_50sdp"-->
+<!--                app:layout_constraintTop_toBottomOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:textAlignment="center"-->
+<!--                android:elevation="@dimen/_3sdp"-->
+<!--                android:padding="@dimen/_13sdp"-->
+<!--                android:src="@drawable/ic_add_custom2"-->
+<!--                app:tint="@color/darkPurple"-->
+<!--                android:background="@drawable/add_bg_gradient" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

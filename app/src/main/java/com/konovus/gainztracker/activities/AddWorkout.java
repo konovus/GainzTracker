@@ -29,6 +29,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.konovus.gainztracker.activities.MainActivity.new_workout_c;
+import static com.konovus.gainztracker.activities.MainActivity.new_workout_d;
+
 public class AddWorkout extends AppCompatActivity implements ExercisesAdapter.ExercisesListener {
 
     public static final int REQUEST_CODE_ADD_EXERCISE = 1;
@@ -87,7 +90,9 @@ public class AddWorkout extends AppCompatActivity implements ExercisesAdapter.Ex
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
-                    onBackPressed();
+                    new_workout_c = true;
+                    new_workout_d = true;
+                    startActivity(new Intent(this, MainActivity.class));
                     compositeDisposable.dispose();
                 }));
     }

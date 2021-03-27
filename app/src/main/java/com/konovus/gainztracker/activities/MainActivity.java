@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.konovus.gainztracker.CalendarFragment;
@@ -18,9 +17,7 @@ import com.konovus.gainztracker.models.Workout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -44,23 +41,22 @@ public class MainActivity extends AppCompatActivity {
     public Bitmap bitmap;
     private static String name;
     public static String path;
-    public static boolean new_workout;
+    public static boolean new_workout_d;
+    public static boolean new_workout_c;
+    public static boolean from_dashboard = true;
+    public static boolean from_calendar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        long startTime = System.nanoTime();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        long endTime_one = System.nanoTime();
-        Log.i("TIME Measure", "After set content view - " + TimeUnit.NANOSECONDS.toMillis(endTime_one - startTime) + " - " + (endTime_one - startTime));
+
         binding.addWorkout.setOnClickListener(v -> startActivityForResult(
                 new Intent(this, AddWorkout.class), REQUEST_CODE_ADD_WORKOUT));
-
+//        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
+//                new CalendarFragment()).commit();
 //        binding.calendarBtn.setOnClickListener(v -> startActivity(new Intent(this, CalendarActivity.class)));
-
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
-                new DashboardFragment()).commit();
         switchFragments();
 
 //        binding.profileImg.setOnClickListener(v -> profileDialogSetup());
@@ -92,9 +88,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchFragments(){
+        if(from_dashboard)
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
+                    new DashboardFragment()).commit();
+        else {
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
+                    new CalendarFragment()).commit();
+            binding.dashboardBtn.setColorFilter(ContextCompat.getColor(this, R.color.gray),
+                    PorterDuff.Mode.MULTIPLY);
+            binding.calendarBtn.setColorFilter(ContextCompat.getColor(this, R.color.white),
+                    PorterDuff.Mode.MULTIPLY);
+        }
         binding.dashboardBtn.setOnClickListener(v -> {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     new DashboardFragment()).commit();
+            from_dashboard = true;
+            from_calendar = false;
             binding.dashboardBtn.setColorFilter(ContextCompat.getColor(this, R.color.white),
                     PorterDuff.Mode.MULTIPLY);
             binding.calendarBtn.setColorFilter(ContextCompat.getColor(this, R.color.gray),
@@ -103,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         binding.calendarBtn.setOnClickListener(v -> {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     new CalendarFragment()).commit();
+            from_dashboard = false;
+            from_calendar = true;
             binding.dashboardBtn.setColorFilter(ContextCompat.getColor(this, R.color.gray),
                     PorterDuff.Mode.MULTIPLY);
             binding.calendarBtn.setColorFilter(ContextCompat.getColor(this, R.color.white),
@@ -256,13 +267,13 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 //
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == REQUEST_CODE_ADD_WORKOUT || requestCode == REQUEST_CODE_EDIT_WORKOUT)
-            new_workout = true;
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == REQUEST_CODE_ADD_WORKOUT || requestCode == REQUEST_CODE_EDIT_WORKOUT)
+//            new_workout = true;
+//    }
 //
 //    @Override
 //    public void OnWorkoutClick(int pos, View view, Workout workout) {

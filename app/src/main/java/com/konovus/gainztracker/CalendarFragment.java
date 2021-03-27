@@ -27,7 +27,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -37,7 +36,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.konovus.gainztracker.activities.MainActivity.new_workout;
 import static com.konovus.gainztracker.activities.MainActivity.path;
 
 
@@ -73,20 +71,15 @@ public class CalendarFragment extends Fragment implements WorkoutAdapter.Workout
 
         return view;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(new_workout)
-            getWorkouts();
-        new_workout = false;
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if(new_workout_c)
+//            getWorkouts();
+//        new_workout_c = false;
+//        new_workout_d = false;
+//    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_ADD_WORKOUT)
-            getWorkouts();
-    }
 
     private void getWorkouts(){
         workouts = new ArrayList<>();
